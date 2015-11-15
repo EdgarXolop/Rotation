@@ -7,7 +7,7 @@
 	- 2 : Right pivot.
 	- 3 : Bottom pivot.
 	- 4 : Left pivot.
-	- 5 : Center pivot 
+	- 0 : Center pivot 
 
 ###First commit
 * Game 2D
