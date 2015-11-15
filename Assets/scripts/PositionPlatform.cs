@@ -3,55 +3,32 @@ using System.Collections;
 
 public class PositionPlatform : MonoBehaviour
 {
-
-
-    private float smooth = 5.0F;
-    public int rotaitonZ = 90;
-    public float targetAngleZ = 0;
-    public int indexPivot = 0;
-    private Quaternion target;
-    private Quaternion pivot;
-    public bool isAnimed = false;
+    public float rotationSpeed = 20f;
+    public float distance = 5f;
+    public Vector3 pivot = new Vector3(0f, 6.73f, 30f);
+    private float currentYAngle = 0f;
+    private float targetYAngle = 90f;
 
     // Use this for initialization
     void Start()
     {
-        target = Quaternion.Euler(0, 0, 0);
     }
 
     // Update is called once per frame
     void Update()
     {
-        
-        if (Input.GetKey("up") && !isAnimed)
-        {
-            isAnimed = true;
-        }
+        currentYAngle = Mathf.MoveTowardsAngle(currentYAngle, targetYAngle, rotationSpeed * Time.deltaTime);
 
-        if (isAnimed)
-        {
-            target = Quaternion.Euler(0, 0, rotaitonZ);
-            transform.rotation = Quaternion.Slerp(transform.rotation, target, Time.deltaTime * smooth);
+        /*transform.position = new Vector3(
+            pivot.x + Mathf.Sin(currentYAngle * Mathf.Deg2Rad) * distance,
+            transform.position.z,
+            pivot.z + Mathf.Cos(currentYAngle * Mathf.Deg2Rad) * distance
+        );*/
 
-        }
-        targetAngleZ = transform.rotation.eulerAngles.z;
-        if (rotaitonZ >= 359)
-        {
-            rotaitonZ = 0;
-        }
-
-        if (targetAngleZ <= (rotaitonZ + 1) && targetAngleZ >= (rotaitonZ - 1))
-        {
-            isAnimed = false;
-            Debug.Log(rotaitonZ);
-            if (rotaitonZ == 0 )
-            {
-                rotaitonZ = 90;
-            }
-            else {
-
-                rotaitonZ += 90;
-            }
-        }
+        transform.position = new Vector3(
+            transform.position.x,
+            transform.position.y,
+             pivot.z + Mathf.Cos(currentYAngle * Mathf.Deg2Rad) * distance
+        );
     }
 }
