@@ -1,6 +1,6 @@
 # UNNAMED
 
-###Chage pivot
+###Change pivot
 * Activate animation with the up key
 * Selection of the pivot, list of the keys mapped:
 	- 1 : Top pivot.
